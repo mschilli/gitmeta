@@ -1,4 +1,5 @@
 Changes
+eg/gitmeta-update
 eg/myrepos.gmf
 lib/GitMeta.pm
 lib/GitMeta/Github.pm

@@ -3,5 +3,6 @@ blib
 ^Makefile.old$
 .cvsignore
 adm
-.git
+.git/
 MANIFEST.bak
+.gitignore
