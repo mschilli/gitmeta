@@ -235,6 +235,23 @@ definition in another gitmeta repo. You define the following
         repo: user@devhost.com:git/gitmeta
         gmf_path: privdev.gmf
 
+Note that in order to update a local repository, gitsync will fetch
+the remote changes, but won't merge them into the local clone. This
+is because there might be merge conflicts and when updating dozens
+of repos in one quick run, you don't want to be interrupted to
+resolve a conflicted merge.
+
+So, in git parlance, C<gitsync> performs a C<git fetch>, not a C<git pull>.
+The updates will therefore be available in your locally defined
+remote branches, and if you want to merge them into the local branches,
+you need to run a C<git merge> (you don't need an Internet connection for 
+that, so you can do this later), e.g. use
+
+    git merge origin/master
+
+to merge the changes in the 'master' branch of the 'origin' remote into 
+the local branch you're currently on (presumably 'master' as well).
+
 =head1 TROUBLESHOOTING
 
 Make sure that 'git' is in your PATH.
