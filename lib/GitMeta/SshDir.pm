@@ -14,12 +14,15 @@ sub expand {
 ###########################################
   my($self) = @_;
 
+  my $ssh = "ssh";
+  $ssh = $ENV{GIT_SSH} if defined $ENV{GIT_SSH};
+
   $self->param_check("host", "dir");
 
   INFO "Retrieving repos ",
        "from $self->{host}";
 
-  my($stdout) = tap "ssh", $self->{host}, 
+  my($stdout) = tap $ssh, $self->{host}, 
      "ls", $self->{dir};
 
   my @repos = ();
@@ -54,6 +57,9 @@ __END__
 =head1 DESCRIPTION
 
 GitMeta subclass to pull in repos from a server accessible via ssh.
+Uses the first available C<ssh> command via C<$PATH> but accepts
+C<GIT_SSH> environment variable settings as well.
+
 Read the main GitMeta documentation for details.
 
 =head1 LEGALESE
