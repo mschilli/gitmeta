@@ -1,8 +1,9 @@
 ######################################################################
 Revision history for Perl extension Git::Meta
 
-0.02  2011/04/24
+0.02  2011/06/25
   (mschilli) SshDir.pm now accepts GIT_SSH settings.
+  (mschilli) Better error checking in test suite
 
 0.01  2011/04/24
   (mschilli) Where it all began.

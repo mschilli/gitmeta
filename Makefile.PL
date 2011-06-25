@@ -17,7 +17,7 @@ WriteMakefile(
     'VERSION_FROM'   => 'lib/GitMeta.pm', # finds $VERSION
     'EXE_FILES'      => ["eg/gitmeta-update"],
     'PREREQ_PM'      => {
-       Sysadm::Install => 0.33,
+       Sysadm::Install => 0.37,
        Log::Log4perl   => 1.0,
        LWP::UserAgent  => 5,
        XML::Simple     => 2.18,

@@ -6,6 +6,7 @@
 use warnings;
 use strict;
 
+use Cwd;
 use Test::More;
 use Sysadm::Install qw(:all);
 use File::Temp qw(tempdir);
@@ -25,6 +26,8 @@ use GitMeta::SshDir;
 
 my($stdout, $stderr, $rc) = tap "git", "version";
 
+my $old_cwd = cwd();
+
 SKIP:
 {
     if( $rc ) {
@@ -35,10 +38,10 @@ SKIP:
     my $repodir   = tempdir( CLEANUP => 1 );
     my $reponame = basename $repodir;
     cd $repodir;
-    tap "git", "init";
+    tap { raise_error => 1 }, "git", "init";
     blurt "blah\n", "a.txt";
-    tap "git", "add", "a.txt";
-    tap "git", "commit", "-m", "test", "a.txt";
+    tap { raise_error => 1 }, "git", "add", "a.txt";
+    tap { raise_error => 1 }, "git", "commit", "-m", "test", "a.txt";
     cdback;
 
     my $metadir   = tempdir( CLEANUP => 1 );
@@ -48,7 +51,7 @@ SKIP:
 EOT
 
     my $localdir  = tempdir( CLEANUP => 1 );
-    tap $^X, "-I$Bin/../lib",
+    tap { raise_error => 1 }, $^X, "-I$Bin/../lib",
       "$Bin/../eg/gitmeta-update", $gmf_file, "$localdir";
 
     cd "$localdir/$reponame";
@@ -57,3 +60,7 @@ EOT
 
     is($data, "blah\n", "gitmeta-update with local gmf");
 }
+
+END {
+    chdir $old_cwd;
+};
