@@ -31,6 +31,8 @@ if(!defined $local_dir) {
     ($gmf_path, $local_dir) = @ARGV;
 }
 
+GitMeta->health_check();
+
 die "usage: $0 [gmf-repo] gmf-path local-dir" 
   unless defined $local_dir;
 

@@ -1,6 +1,9 @@
 ######################################################################
 Revision history for Perl extension Git::Meta
 
+0.03  (not yet released)
+  (mschilli) Checking for git in path at startup in gitmeta-update
+
 0.02  2011/06/25
   (mschilli) SshDir.pm now accepts GIT_SSH settings.
   (mschilli) Better error checking in test suite

@@ -3,8 +3,9 @@ package GitMeta;
 ###########################################
 use strict;
 use warnings;
+use Sysadm::Install qw(:all);
 
-our $VERSION = "0.02";
+our $VERSION = "0.03";
 
 ###########################################
 sub new { 
@@ -31,6 +32,18 @@ sub param_check {
       die "Parameter $param missing";
     }
   }
+}
+
+###########################################
+sub health_check {
+###########################################
+
+    # Check if we have git in $PATH
+    my( $stdout, $stderr, $rc ) = tap "git", "--version";
+
+    if( $rc ) {
+        die "git not found in path";
+    }
 }
 
 1;
