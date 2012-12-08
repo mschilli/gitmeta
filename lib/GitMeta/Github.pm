@@ -6,8 +6,7 @@ package GitMeta::Github;
 use strict;
 use warnings;
 use base qw(GitMeta);
-use LWP::UserAgent;
-use XML::Simple;
+use Net::Github;
 
 ###########################################
 sub expand {
@@ -19,24 +18,12 @@ sub expand {
   my $user  = $self->{user};
   my @repos = ();
 
-  my $ua = LWP::UserAgent->new();
-  my $resp = $ua->get(
-   "http://github.com/api/v1/xml/$user");
+  my $gh = Net::GitHub::V3->new;
+  my @by_repos = $gh->repos->list_user($user);
 
-  if($resp->is_error) {
-    die "API fetch failed: ",
-        $resp->message();
-  }
-
-  my $xml = XMLin(
-      $resp->decoded_content());
-
-  my $by_repo = 
-    $xml->{repositories}->{repository};
-
-  for my $repo (keys %$by_repo) {
+  for my $repo (@by_repos) {
       push @repos, 
-        "git\@github.com:$user/$repo.git";
+        $repo->{'ssh_url'};
   }
 
   return @repos;
