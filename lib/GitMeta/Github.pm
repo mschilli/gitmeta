@@ -6,8 +6,7 @@ package GitMeta::Github;
 use strict;
 use warnings;
 use base qw(GitMeta);
-use LWP::UserAgent;
-use XML::Simple;
+use Pithub;
 
 ###########################################
 sub expand {
@@ -19,24 +18,12 @@ sub expand {
   my $user  = $self->{user};
   my @repos = ();
 
-  my $ua = LWP::UserAgent->new();
-  my $resp = $ua->get(
-   "http://github.com/api/v1/xml/$user");
+  my $ph = Pithub->new;
+  my $result = $ph->repos->list( user => $user );
 
-  if($resp->is_error) {
-    die "API fetch failed: ",
-        $resp->message();
-  }
-
-  my $xml = XMLin(
-      $resp->decoded_content());
-
-  my $by_repo = 
-    $xml->{repositories}->{repository};
-
-  for my $repo (keys %$by_repo) {
+  while ( my $repo = $result->next ) {
       push @repos, 
-        "git\@github.com:$user/$repo.git";
+        "git\@github.com:$user/$repo->{name}.git";
   }
 
   return @repos;

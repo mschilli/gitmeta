@@ -19,8 +19,7 @@ WriteMakefile(
     'PREREQ_PM'      => {
        Sysadm::Install => 0.37,
        Log::Log4perl   => 1.0,
-       LWP::UserAgent  => 5,
-       XML::Simple     => 2.18,
+       Pithub          => 0.01016,
        File::Temp      => 0.22,
        YAML            => 0.71,
     }, # e.g., Module::Name => 1.1
