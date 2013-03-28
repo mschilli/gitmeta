@@ -18,7 +18,7 @@ sub expand {
   my $user  = $self->{user};
   my @repos = ();
 
-  my $ph = Pithub->new;
+  my $ph = Pithub->new( auto_pagination => 1 );
   my $result = $ph->repos->list( user => $user );
 
   while ( my $repo = $result->next ) {
