@@ -5,4 +5,6 @@ blib
 adm
 .git/
 MANIFEST.bak
+MYMETA.json
+MYMETA.yml
 .gitignore
