@@ -5,7 +5,7 @@ use strict;
 use warnings;
 use Sysadm::Install qw(:all);
 
-our $VERSION = "0.04";
+our $VERSION = "0.05";
 
 ###########################################
 sub new { 

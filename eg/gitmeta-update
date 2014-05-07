@@ -66,8 +66,7 @@ sub main {
 
   for my $url ( @urls ) {
     INFO "Updating $url";
-    my $repo_dir = basename $url;
-    $repo_dir =~ s/\.git$//g;
+    my $repo_dir = $gm->repo_dir_from_git_url( $url );
     if(-d $repo_dir) {
       cd $repo_dir;
       my($stdout, $stderr, $rc) =

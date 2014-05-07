@@ -1,6 +1,11 @@
 ######################################################################
 Revision history for Perl extension Git::Meta
 
+0.05  (2014/05/06)
+  (mschilli) Fixed a bug with scp-style git urls without subdirectories,
+    reported by Martin Heistermann: 
+    https://github.com/mschilli/gitmeta/issues/4
+
 0.04  (2013/03/27)
   (mschilli) Turned on Pithub autopagination to handle more than 30 
              repos at a time.

@@ -67,6 +67,26 @@ sub _fetch {
     return $yml;
 }
 
+###########################################
+sub repo_dir_from_git_url {
+###########################################
+    my( $self, $url ) = @_;
+
+    my $repo_dir;
+
+    if( $url =~ m#/# ) {
+        $repo_dir = basename $url;
+    } elsif( $url =~ m#:(.*)# ) {
+        $repo_dir = $1;
+    } else {
+        die "cannot determine dir from git url: $url";
+    }
+
+    $repo_dir =~ s/\.git$//g;
+
+    return $repo_dir;
+}
+
 1;
 
 __END__

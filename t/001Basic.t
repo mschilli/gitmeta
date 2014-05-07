@@ -51,8 +51,12 @@ SKIP:
 EOT
 
     my $localdir  = tempdir( CLEANUP => 1 );
-    tap { raise_error => 1 }, $^X, "-I$Bin/../lib",
+    my( $stdout, $stderr, $rc ) = 
+    tap $^X, "-I$Bin/../lib",
       "$Bin/../eg/gitmeta-update", $gmf_file, "$localdir";
+    if( $rc ) {
+        die "failed: $stderr";
+    }
 
     cd "$localdir/$reponame";
     my $data = slurp "a.txt";
